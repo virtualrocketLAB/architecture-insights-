@@ -1,0 +1,14 @@
+name: Mirror Repository
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Mirror Repository
+      run: |
+        git clone --mirror https://github.com/SynkraAI/aios-core.git aios-core.git
+        cd aios-core.git
+        git push --mirror https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/virtualrocketLAB/architecture-insights.git
